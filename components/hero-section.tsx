@@ -1,8 +1,11 @@
 "use client"
 
-import { Mail, Download, ArrowRight } from "lucide-react"
+import { Mail, Download, ArrowRight, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import Link from "next/link"
+import { CaseStudy } from "@/lib/content"
+import { cn } from "@/lib/utils"
 
 interface HeroSectionProps {
   content: {
@@ -12,9 +15,17 @@ interface HeroSectionProps {
     metrics: { value: string; label: string }[]
   }
   email: string
+  caseStudies: CaseStudy[]
 }
 
-export function HeroSection({ content, email }: HeroSectionProps) {
+const bubblePositions = [
+  { top: "5%", left: "-10%", delay: 0.5, color: "bg-orange-100 text-orange-600" },
+  { top: "20%", right: "-15%", delay: 0.7, color: "bg-blue-100 text-blue-600" },
+  { bottom: "25%", left: "-15%", delay: 0.9, color: "bg-emerald-100 text-emerald-600" },
+  { top: "65%", right: "-10%", delay: 1.1, color: "bg-purple-100 text-purple-600" },
+]
+
+export function HeroSection({ content, email, caseStudies }: HeroSectionProps) {
   return (
     <section className="container mx-auto px-4 py-16 md:py-28 relative overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-12 md:space-y-16">
@@ -107,18 +118,52 @@ export function HeroSection({ content, email }: HeroSectionProps) {
               <img
                 src="/avatar/avatar.png"
                 alt="Subhadeep Dey"
-                className="w-full h-full object-contain transition-all duration-500"
+                className="w-full h-full object-contain transition-all duration-500 relative z-10"
               />
 
-              {/* Floating Status */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-4 -left-4 md:-left-8 bg-white/90 backdrop-blur-md border border-primary/10 p-4 rounded-xl shadow-xl hidden sm:flex items-center gap-3"
-              >
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Open to PM roles</span>
-              </motion.div>
+              {/* Product Bubbles */}
+              {caseStudies.slice(0, 4).map((study, index) => (
+                <motion.div
+                  key={study.slug}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ 
+                    delay: bubblePositions[index].delay,
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20
+                  }}
+                  className="absolute z-20"
+                  style={{
+                    top: bubblePositions[index].top,
+                    left: bubblePositions[index].left,
+                    right: bubblePositions[index].right,
+                    bottom: bubblePositions[index].bottom,
+                  }}
+                >
+                  <Link href={`/case-studies/${study.slug}`}>
+                    <motion.div
+                      animate={{ 
+                        y: [0, -8, 0],
+                        rotate: [-1, 1, -1]
+                      }}
+                      transition={{ 
+                        duration: 3 + index, 
+                        repeat: Infinity, 
+                        ease: "easeInOut" 
+                      }}
+                      className={cn(
+                        "flex items-center gap-2 px-4 py-2 rounded-full shadow-lg border border-white/50 backdrop-blur-sm cursor-pointer hover:scale-110 transition-transform whitespace-nowrap",
+                        bubblePositions[index].color
+                      )}
+                    >
+                      <span className="text-xs font-bold tracking-tight">{study.title}</span>
+                      <ExternalLink className="w-3 h-3 opacity-50" />
+                    </motion.div>
+                  </Link>
+                </motion.div>
+              ))}
+
             </div>
           </motion.div>
         </div>

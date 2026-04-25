@@ -17,7 +17,7 @@ navigation:
 
 hero:
   label: "I build AI-powered EdTech that teaches"
-  title: "Building the <span class='text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent'>future of education</span> through purpose-driven product innovation"
+  title: "Building the <span class='text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent'>future of learning</span> through purpose-driven product innovation"
   description: "Educator-Technologist with 8+ years experience. Shipped 4 end-to-end products. IIT Madras & IIM Rohtak alumnus (pursuing). Bridging the gap between pedagogical excellence and technical innovation."
   metrics:
     - value: "8+"

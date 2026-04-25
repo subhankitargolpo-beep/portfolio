@@ -42,6 +42,7 @@ export default function Home() {
       <HeroSection 
         content={homeContent.hero} 
         email={homeContent.email} 
+        caseStudies={caseStudies}
       />
       <LogoMarquee items={homeContent.marquee} />
       <ServicesSection 

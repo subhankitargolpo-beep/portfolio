@@ -211,6 +211,31 @@
   @apply border-l-4 border-primary/30 pl-6 py-2 italic text-foreground/70 mb-8 bg-primary/5 rounded-r-lg;
 }
 
+/* Table Styles */
+.prose table {
+  @apply w-full border-collapse my-12 text-sm text-left overflow-hidden rounded-xl border border-border shadow-sm;
+}
+
+.prose thead {
+  @apply bg-secondary/5 border-b border-border;
+}
+
+.prose th {
+  @apply px-6 py-4 font-bold text-foreground uppercase tracking-wider text-xs;
+}
+
+.prose td {
+  @apply px-6 py-4 border-b border-border text-muted-foreground leading-relaxed;
+}
+
+.prose tr:last-child td {
+  @apply border-b-0;
+}
+
+.prose tr:hover td {
+  @apply bg-primary/5 transition-colors;
+}
+
 .prose hr {
   @apply my-16 border-border;
 }

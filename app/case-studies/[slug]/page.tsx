@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ArrowLeft, ExternalLink, FileText, BarChart, Settings, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 interface CaseStudyPageProps {
   params: Promise<{ slug: string }>
@@ -87,7 +88,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
               {/* Case Study Content (Markdown) */}
               <div className="prose max-w-none">
-                <ReactMarkdown>{study.content}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{study.content}</ReactMarkdown>
               </div>
             </div>
           </div>
