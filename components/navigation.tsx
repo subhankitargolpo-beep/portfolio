@@ -32,8 +32,17 @@ export function Navigation({ siteName, links, email }: NavigationProps) {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="/" className="text-4xl md:text-5xl font-serif font-bold text-primary">
-          {siteName}
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-all">
+            <img 
+              src="/logo.png" 
+              alt="Logo" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <span className="text-2xl md:text-3xl font-serif font-bold text-primary tracking-tight">
+            {siteName}
+          </span>
         </Link>
 
         {/* Desktop Navigation */}

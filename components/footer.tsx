@@ -22,10 +22,14 @@ export function Footer({ content, email }: FooterProps) {
           {/* Brand & Socials */}
           <div className="flex flex-col items-center md:items-start gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-primary-foreground font-serif font-bold text-lg">P</span>
+              <div className="w-10 h-10 rounded-full overflow-hidden border border-primary/20">
+                <img 
+                  src="/logo.png" 
+                  alt="Logo" 
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <span className="font-serif font-bold text-lg text-foreground">Portfolio</span>
+              <span className="font-serif font-bold text-xl text-foreground">Portfolio</span>
             </div>
             <div className="flex gap-3">
               {content.socialLinks.map((link) => {
