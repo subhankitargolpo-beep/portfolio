@@ -4,25 +4,26 @@ import { Experience } from "@/lib/content"
 
 interface ExperienceSectionProps {
   experience: Experience[]
+  consulting: Experience[]
   config: { title: string; subtitle: string }
 }
 
-export function ExperienceSection({ experience, config }: ExperienceSectionProps) {
+export function ExperienceSection({ experience, consulting, config }: ExperienceSectionProps) {
   return (
     <section id="experience" className="container mx-auto px-4 py-16 md:py-28">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <div className="mb-16">
           <div className="inline-flex items-center px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary mb-4">
-            <span className="text-sm font-medium">{config.subtitle}</span>
+            <span className="text-sm font-medium uppercase tracking-widest">{config.subtitle}</span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground leading-tight">
             {config.title}
           </h2>
         </div>
 
-        {/* Timeline */}
-        <div className="space-y-6 mb-12">
+        {/* Timeline - Main Experience */}
+        <div className="space-y-6 mb-24">
           {experience.map((exp, index) => (
             <div
               key={index}
@@ -47,7 +48,9 @@ export function ExperienceSection({ experience, config }: ExperienceSectionProps
                 <div className="md:col-span-2">
                   <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-2">Role</p>
                   <h4 className="text-lg font-bold text-foreground mb-3">{exp.role}</h4>
-                  <p className="text-muted-foreground leading-relaxed mb-4">{exp.description}</p>
+                  <div className="text-muted-foreground leading-relaxed mb-4 whitespace-pre-line">
+                    {exp.description}
+                  </div>
 
                   {/* Metrics */}
                   <div className="flex flex-wrap gap-3">
@@ -64,6 +67,24 @@ export function ExperienceSection({ experience, config }: ExperienceSectionProps
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Consulting Section */}
+        <div className="mb-16">
+          <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-8 pb-4 border-b border-border">
+            Consulting & Project-Based Work
+          </h3>
+          <div className="grid sm:grid-cols-2 gap-6">
+            {consulting.map((item, index) => (
+              <div key={index} className="bg-white border border-border rounded-xl p-6 hover:border-accent/40 transition-all">
+                <div className="flex justify-between items-start mb-4">
+                  <p className="text-xs font-bold text-accent uppercase tracking-widest">{item.period}</p>
+                </div>
+                <h4 className="text-lg font-bold text-foreground mb-2">{item.role}</h4>
+                <p className="text-sm font-serif text-secondary mb-3">{item.company}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Full resume button */}

@@ -14,6 +14,7 @@ import {
   getCaseStudies, 
   getStrategicCaseStudies,
   getExperience, 
+  getConsulting,
   getWritings, 
   getTestimonials, 
   getSkills, 
@@ -25,6 +26,7 @@ export default function Home() {
   const caseStudies = getCaseStudies()
   const strategicCaseStudies = getStrategicCaseStudies()
   const experience = getExperience()
+  const consulting = getConsulting()
   const writings = getWritings()
   const testimonials = getTestimonials()
   const skills = getSkills()
@@ -60,6 +62,7 @@ export default function Home() {
       />
       <ExperienceSection 
         experience={experience} 
+        consulting={consulting}
         config={homeContent.sections.experience} 
       />
       <TestimonialsSection 

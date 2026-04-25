@@ -206,3 +206,25 @@ export function getStrategicCaseStudies(): CaseStudy[] {
       } as CaseStudy
     })
 }
+
+export function getConsulting(): Experience[] {
+  const dir = path.join(contentDirectory, 'consulting')
+  if (!fs.existsSync(dir)) return []
+  const files = fs.readdirSync(dir)
+  return files
+    .filter(file => file.endsWith('.md'))
+    .map(file => {
+      const filePath = path.join(dir, file)
+      const fileContent = fs.readFileSync(filePath, 'utf8')
+      const { data } = matter(fileContent)
+      return {
+        company: data.company,
+        role: data.role,
+        period: data.period,
+        description: data.description || "",
+        metrics: data.metrics || [],
+        order: data.order || 0
+      } as Experience
+    })
+    .sort((a, b) => (a.order || 0) - (b.order || 0))
+}

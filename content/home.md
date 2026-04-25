@@ -73,5 +73,5 @@ footer:
     - platform: "LinkedIn"
       url: "https://linkedin.com/in/subhadeep-dey-a88979b7"
     - platform: "GitHub"
-      url: "https://github.com/subhadeepstar"
+      url: "https://github.com/subhankitargolpo-beep"
 ---
