@@ -3,7 +3,7 @@
 import { Mail, Download, ArrowRight, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import Link from "next/link"
+import { LoadingLink } from "@/components/loading-link"
 import { CaseStudy } from "@/lib/content"
 import { cn } from "@/lib/utils"
 
@@ -141,7 +141,7 @@ export function HeroSection({ content, email, caseStudies }: HeroSectionProps) {
                     bottom: bubblePositions[index].bottom,
                   }}
                 >
-                  <Link href={`/case-studies/${study.slug}`}>
+                  <LoadingLink href={`/case-studies/${study.slug}`}>
                     <motion.div
                       animate={{ 
                         y: [0, -8, 0],
@@ -160,7 +160,7 @@ export function HeroSection({ content, email, caseStudies }: HeroSectionProps) {
                       <span className="text-xs font-bold tracking-tight">{study.title}</span>
                       <ExternalLink className="w-3 h-3 opacity-50" />
                     </motion.div>
-                  </Link>
+                  </LoadingLink>
                 </motion.div>
               ))}
 

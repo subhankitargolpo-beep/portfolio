@@ -1,6 +1,10 @@
+"use client"
+
 import { BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Writing } from "@/lib/content"
+import { SectionWrapper, staggerContainer, fadeInUp } from "./section-wrapper"
+import { motion } from "framer-motion"
 
 interface ArticlesSectionProps {
   writings: Writing[]
@@ -9,10 +13,16 @@ interface ArticlesSectionProps {
 
 export function ArticlesSection({ writings, config }: ArticlesSectionProps) {
   return (
-    <section id="articles" className="container mx-auto px-4 py-16 md:py-28">
-      <div className="max-w-7xl mx-auto">
+    <SectionWrapper id="articles" className="container mx-auto px-4 py-16 md:py-28">
+      <motion.div 
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto"
+      >
         {/* Section header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12">
+        <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12">
           <div>
             <div className="inline-flex items-center px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary mb-4">
               <span className="text-sm font-medium">{config.subtitle}</span>
@@ -21,13 +31,14 @@ export function ArticlesSection({ writings, config }: ArticlesSectionProps) {
               {config.title}
             </h2>
           </div>
-        </div>
+        </motion.div>
 
         {/* Articles grid */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <motion.div variants={staggerContainer} className="grid md:grid-cols-3 gap-6">
           {writings.map((article, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={fadeInUp}
               className="group bg-white border border-border rounded-xl p-6 md:p-8 hover:border-primary/40 hover:shadow-lg transition-all flex flex-col"
             >
               {/* Category tag */}
@@ -60,10 +71,10 @@ export function ArticlesSection({ writings, config }: ArticlesSectionProps) {
                   →
                 </a>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </SectionWrapper>
   )
 }

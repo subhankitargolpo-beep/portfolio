@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Link from "next/link"
+import { LoadingLink } from "@/components/loading-link"
 import { Menu, X, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -32,7 +32,7 @@ export function Navigation({ siteName, links, email }: NavigationProps) {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 group">
+        <LoadingLink href="/" className="flex items-center gap-3 group">
           <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-all">
             <img 
               src="/logo.png" 
@@ -43,18 +43,18 @@ export function Navigation({ siteName, links, email }: NavigationProps) {
           <span className="text-2xl md:text-3xl font-serif font-bold text-primary tracking-tight">
             {siteName}
           </span>
-        </Link>
+        </LoadingLink>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           {links.map((link) => (
-            <Link
+            <LoadingLink
               key={link.label}
               href={link.href}
               className="text-sm font-medium text-foreground/70 hover:text-primary transition-colors"
             >
               {link.label}
-            </Link>
+            </LoadingLink>
           ))}
           <Button
             asChild
@@ -79,14 +79,14 @@ export function Navigation({ siteName, links, email }: NavigationProps) {
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-border p-4 space-y-4 shadow-xl">
           {links.map((link) => (
-            <Link
+            <LoadingLink
               key={link.label}
               href={link.href}
               className="block text-lg font-medium text-foreground py-2"
               onClick={() => setIsOpen(false)}
             >
               {link.label}
-            </Link>
+            </LoadingLink>
           ))}
           <Button asChild className="w-full justify-center bg-primary text-white py-6">
             <a href="/cv/resume.pdf" download>

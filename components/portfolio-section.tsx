@@ -1,6 +1,10 @@
+"use client"
+
 import { ArrowRight } from "lucide-react"
 import { CaseStudy } from "@/lib/content"
-import Link from "next/link"
+import { LoadingLink } from "@/components/loading-link"
+import { SectionWrapper, staggerContainer, fadeInUp } from "./section-wrapper"
+import { motion } from "framer-motion"
 
 interface PortfolioSectionProps {
   caseStudies: CaseStudy[]
@@ -9,23 +13,30 @@ interface PortfolioSectionProps {
 
 export function PortfolioSection({ caseStudies, config }: PortfolioSectionProps) {
   return (
-    <section id="portfolio" className="container mx-auto px-4 py-16 md:py-28">
-      <div className="max-w-7xl mx-auto">
+    <SectionWrapper id="portfolio" className="container mx-auto px-4 py-16 md:py-28">
+      <motion.div 
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto"
+      >
         {/* Section header */}
-        <div className="mb-16">
+        <motion.div variants={fadeInUp} className="mb-16">
           <div className="inline-flex items-center px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary mb-4">
             <span className="text-sm font-medium">{config.subtitle}</span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground leading-tight">
             {config.title}
           </h2>
-        </div>
+        </motion.div>
 
-        {/* Case study grid - 2x2 on desktop, stacked on mobile */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        {/* Case study grid */}
+        <motion.div variants={staggerContainer} className="grid md:grid-cols-2 gap-8 mb-12">
           {caseStudies.map((study) => (
-            <div
+            <motion.div
               key={study.slug}
+              variants={fadeInUp}
               className="group relative bg-white border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:border-primary/40 hover:-translate-y-1 transition-all duration-300"
             >
               {/* Gradient background overlay */}
@@ -76,21 +87,21 @@ export function PortfolioSection({ caseStudies, config }: PortfolioSectionProps)
                     <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
                   </a>
 
-                  <Link
+                  <LoadingLink
                     href={`/case-studies/${study.slug}`}
                     className="inline-flex items-center gap-2 font-bold text-sm uppercase tracking-widest text-secondary hover:text-secondary/80 transition-all"
                   >
                     <span>Product Details</span>
                     <span className="text-[10px] bg-secondary/10 px-2 py-0.5 rounded text-secondary-foreground font-medium lowercase">Tech Specs • Product Logic</span>
-                  </Link>
+                  </LoadingLink>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* View all button */}
-        <div className="flex justify-center">
+        <motion.div variants={fadeInUp} className="flex justify-center">
           <a
             href="#portfolio"
             className="bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors flex items-center gap-2"
@@ -98,8 +109,8 @@ export function PortfolioSection({ caseStudies, config }: PortfolioSectionProps)
             <span>View all projects</span>
             <ArrowRight className="w-5 h-5" />
           </a>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </SectionWrapper>
   )
 }

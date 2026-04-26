@@ -29,6 +29,10 @@ export const metadata: Metadata = {
   generator: "v0.app",
 }
 
+import { LoadingProvider } from "@/lib/loading-context"
+import { PageTransition } from "@/components/page-transition"
+import { Suspense } from "react"
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,7 +40,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-background" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} ${merriweather.variable} font-sans antialiased overflow-x-hidden`} suppressHydrationWarning>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${merriweather.variable} font-sans antialiased overflow-x-hidden`} suppressHydrationWarning>
+        <Suspense fallback={null}>
+          <LoadingProvider>
+            <PageTransition>
+              {children}
+            </PageTransition>
+          </LoadingProvider>
+        </Suspense>
+      </body>
     </html>
   )
 }

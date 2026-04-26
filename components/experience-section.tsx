@@ -1,6 +1,10 @@
+"use client"
+
 import { FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Experience } from "@/lib/content"
+import { SectionWrapper, staggerContainer, fadeInUp } from "./section-wrapper"
+import { motion } from "framer-motion"
 
 interface ExperienceSectionProps {
   experience: Experience[]
@@ -10,23 +14,30 @@ interface ExperienceSectionProps {
 
 export function ExperienceSection({ experience, consulting, config }: ExperienceSectionProps) {
   return (
-    <section id="experience" className="container mx-auto px-4 py-16 md:py-28">
-      <div className="max-w-7xl mx-auto">
+    <SectionWrapper id="experience" className="container mx-auto px-4 py-16 md:py-28">
+      <motion.div 
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto"
+      >
         {/* Section header */}
-        <div className="mb-16">
+        <motion.div variants={fadeInUp} className="mb-16">
           <div className="inline-flex items-center px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary mb-4">
             <span className="text-sm font-medium uppercase tracking-widest">{config.subtitle}</span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground leading-tight">
             {config.title}
           </h2>
-        </div>
+        </motion.div>
 
         {/* Timeline - Main Experience */}
-        <div className="space-y-6 mb-24">
+        <motion.div variants={staggerContainer} className="space-y-6 mb-24">
           {experience.map((exp, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={fadeInUp}
               className="relative bg-white border border-border rounded-xl p-6 md:p-8 hover:border-primary/40 hover:shadow-lg transition-all group"
             >
               {/* Left accent bar */}
@@ -65,30 +76,30 @@ export function ExperienceSection({ experience, consulting, config }: Experience
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Consulting Section */}
-        <div className="mb-16">
+        <motion.div variants={fadeInUp} className="mb-16">
           <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-8 pb-4 border-b border-border">
             Consulting & Project-Based Work
           </h3>
-          <div className="grid sm:grid-cols-2 gap-6">
+          <motion.div variants={staggerContainer} className="grid sm:grid-cols-2 gap-6">
             {consulting.map((item, index) => (
-              <div key={index} className="bg-white border border-border rounded-xl p-6 hover:border-accent/40 transition-all">
+              <motion.div variants={fadeInUp} key={index} className="bg-white border border-border rounded-xl p-6 hover:border-accent/40 transition-all">
                 <div className="flex justify-between items-start mb-4">
                   <p className="text-xs font-bold text-accent uppercase tracking-widest">{item.period}</p>
                 </div>
                 <h4 className="text-lg font-bold text-foreground mb-2">{item.role}</h4>
                 <p className="text-sm font-serif text-secondary mb-3">{item.company}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Full resume button */}
-        <div className="flex justify-center">
+        <motion.div variants={fadeInUp} className="flex justify-center">
           <Button
             asChild
             className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg py-4 px-8 text-lg font-semibold h-auto gap-2"
@@ -98,8 +109,8 @@ export function ExperienceSection({ experience, consulting, config }: Experience
               Download full resume
             </a>
           </Button>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </SectionWrapper>
   )
 }
