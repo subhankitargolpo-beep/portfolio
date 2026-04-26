@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { CaseStudy } from "@/lib/content"
+import { CaseStudyDashboard } from "./case-study-dashboard"
 
 interface CaseStudyContentProps {
   study: CaseStudy
@@ -81,7 +82,25 @@ export function CaseStudyContent({ study }: CaseStudyContentProps) {
 
               {/* Case Study Content (Markdown) */}
               <div className="prose max-w-none">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{study.content}</ReactMarkdown>
+                <ReactMarkdown 
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    code({ node, inline, className, children, ...props }: any) {
+                      const match = /language-dashboard/.exec(className || '')
+                      if (!inline && match) {
+                        try {
+                          const data = JSON.parse(String(children).replace(/\n$/, ''))
+                          return <CaseStudyDashboard {...data} />
+                        } catch (e) {
+                          return <pre className={className} {...props}>{children}</pre>
+                        }
+                      }
+                      return <code className={className} {...props}>{children}</code>
+                    }
+                  }}
+                >
+                  {study.content}
+                </ReactMarkdown>
               </div>
             </div>
           </div>
