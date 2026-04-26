@@ -59,7 +59,7 @@ export function ExperienceSection({ experience, consulting, config }: Experience
                 <div className="md:col-span-2">
                   <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-2">Role</p>
                   <h4 className="text-lg font-bold text-foreground mb-3">{exp.role}</h4>
-                  <div className="text-muted-foreground leading-relaxed mb-4 whitespace-pre-line">
+                  <div className="text-muted-foreground leading-relaxed mb-4 whitespace-pre-line text-justify" style={{ textJustify: 'inter-word' }}>
                     {exp.description}
                   </div>
 

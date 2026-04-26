@@ -36,7 +36,7 @@ export function AboutSection({ skills, config }: AboutSectionProps) {
           <motion.div variants={fadeInUp} className="md:col-span-2 space-y-6">
             <div className="prose prose-lg max-w-none">
               {config.story?.split('\n\n').map((paragraph, i) => (
-                <p key={i} className="text-lg text-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                <p key={i} className="text-lg text-foreground leading-relaxed text-justify" style={{ textJustify: 'inter-word' }} dangerouslySetInnerHTML={{ __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
               ))}
             </div>
 

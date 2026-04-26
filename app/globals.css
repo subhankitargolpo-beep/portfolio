@@ -184,7 +184,8 @@
 .prose h4 { @apply text-xl; }
 
 .prose p {
-  @apply mb-6 text-lg;
+  @apply mb-6 text-lg text-justify;
+  text-justify: inter-word;
 }
 
 .prose ul, .prose ol {
